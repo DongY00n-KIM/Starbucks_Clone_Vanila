@@ -23,6 +23,7 @@ window.addEventListener('scroll', _.throttle(function() {
   if(window.scrollY > 500){
     //hide badge
     // badgeEl.style.display = 'none';
+    //gasp.to(elements, time, option)
     gsap.to(badgeEl, 0.4, {
       display: 'none',
       opacity: 0
@@ -38,3 +39,56 @@ window.addEventListener('scroll', _.throttle(function() {
   }
 }, 300));
 
+const fadeEls = document.querySelectorAll('.visual .fade-in');
+fadeEls.forEach(function(fadeEl, index) {
+  gsap.to(fadeEl, 1, {
+    delay: (index + 1) * 0.7, //0.7 -> 1.4 -> 2.1 -> 2.7
+    opacity: 1
+  });
+});
+
+// new Swiper(arg, option)
+new Swiper('.notice-line .swiper-container', {
+  direction: 'vertical',
+  //  autoplay: true,
+   autoplay:{
+    delay: 4000
+   },
+   loop: true
+});
+
+new Swiper('.promotion .swiper-container', {
+  // default
+  direction: 'horizontal',
+  slidesPerView: 3,
+  spaceBetween: 10,
+  centeredSlides: true,
+  autoplay: {
+    delay: 5000
+  },
+  loop: true,
+  pagination:{
+    el: '.promotion .swiper-pagination', //page number selector
+    clickable: true
+  },
+  navigation: {
+    prevEl: '.promotion .swiper-prev',
+    nextEl: '.promotion .swiper-next'
+  }
+});
+
+const promotionEl = document.querySelector('.promotion');
+const promotionToggleBtn = document.querySelector('.toggle-promotion');
+let isHidePromotion = false;
+
+promotionToggleBtn.addEventListener('click', function(){
+  isHidePromotion = !isHidePromotion;
+  if(isHidePromotion){
+    //hide
+    promotionEl.classList.add('hide');
+  }
+  else{
+    //show
+    promotionEl.classList.remove('hide');
+  }
+});
